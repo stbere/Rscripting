@@ -1,0 +1,26 @@
+# For a business use-case, I wanted to take all of my calculated measures, data fields, etc from my Power BI reports and turn into a JSON file
+
+# install.packages("data.table")
+library(data.table)
+library(jsonlite)
+library(ggplot2)
+
+# Convert the dataset to a data.table for faster processing
+dataset <- as.data.table(dataset)
+
+# Specify the file path for the JSON output
+jsonFilePath <- "path/where/you/want/it/exported.json"
+
+# Convert the data table to JSON using stream_out for efficiency
+stream_out(dataset, file(jsonFilePath))
+
+# Create a plot using ggplot2
+# Note: Customize the plot based on your specific data structure and requirements
+plot <- ggplot(data = dataset, aes(x = dataset[[1]], y = dataset[[2]])) + 
+  geom_point() + 
+  ggtitle("Scatter Plot") + 
+  xlab("X-axis Label") + 
+  ylab("Y-axis Label")
+
+# Display the plot
+print(plot)
